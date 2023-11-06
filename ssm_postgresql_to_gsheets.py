@@ -28,9 +28,6 @@ db_user = os.environ.get("DB_USER")
 db_password = os.environ.get("DB_PASSWORD")
 db_name = os.environ.get("DB_NAME")
 
-# Google Sheets credentials (replace with your own)
-gspread_credentials_file = os.environ.get("GOOGLE_SHEETS_KEY_FILE")
-spreadsheet_name = os.environ.get("GOOGLE_SHEETS_FILE_NAME")
 
 # Establish an SSM session
 ssm = boto3.client("ssm", region_name=region)
@@ -63,6 +60,10 @@ if ssm_start_response.get("SessionId"):
 
     # Close the PostgreSQL connection
     conn.close()
+
+    # Google Sheets credentials (replace with your own)
+    gspread_credentials_file = os.environ.get("GOOGLE_SHEETS_KEY_FILE")
+    spreadsheet_name = os.environ.get("GOOGLE_SHEETS_FILE_NAME")
 
     # Upload data to Google Sheets
     gc = gspread.service_account(filename=gspread_credentials_file)
