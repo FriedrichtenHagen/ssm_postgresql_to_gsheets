@@ -54,5 +54,13 @@ table_ref = client.dataset(dataset_id).table(table_id)
 job = client.load_table_from_dataframe(data, table_ref, job_config=job_config)
 job.result()  # Wait for the job to complete
 
-print(f"Data pushed to BigQuery table: {bigquery_project}.{dataset_id}.{table_id}")
+# print(f"Data pushed to BigQuery table: {bigquery_project}.{dataset_id}.{table_id}")
 
+with open('log_file.log', "a") as log_file:
+    log_message = f"Data pushed to BigQuery table: {bigquery_project}.{dataset_id}.{table_id}"
+    
+    # Print the message to the console
+    print(log_message)
+    
+    # Write the message to the log file
+    print(log_message, file=log_file)
